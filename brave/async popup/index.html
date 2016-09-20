@@ -5,9 +5,9 @@
         <script>
             document.addEventListener( "DOMContentLoaded", () => {
                 document.addEventListener( "click", event => {
-                    document.body.appendChild(document.createTextNode("Clicked"));
-                    setTimeout(()=>{
-                        document.body.appendChild(document.createTextNode("Loaded"));
+                    document.body.appendChild( document.createTextNode( "Clicked" ) );
+                    setTimeout( () => {
+                        document.body.appendChild( document.createTextNode( "Loaded" ) );
                         window.open( "", null, "left=100,top=100,width=320,height=240" );
                     }, 1000);
                 });
