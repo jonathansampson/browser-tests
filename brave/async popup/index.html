@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Async Popup</title>
+        <script>
+            document.addEventListener( "DOMContentLoaded", () => {
+                document.addEventListener( "click", event => {
+                    document.body.appendChild(document.createTextNode("Clicked"));
+                    setTimeout(()=>{
+                        document.body.appendChild(document.createTextNode("Loaded"));
+                        window.open( "", null, "left=100,top=100,width=320,height=240" );
+                    }, 1000);
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <p>Brave appears to block some async calls to <code>window.open</code>, while permitting others.</p>
+        <p>Clicking anywhere on this page registers a click event, and after 1000 ms attempts to open a window.</p>
+    </body>
+</html>
