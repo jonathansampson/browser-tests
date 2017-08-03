@@ -1,0 +1,18 @@
+<button id="say">Speak</button> <span id="state">Stopped</span>
+<script>
+    say.addEventListener('click', () => {
+        let phrase = new SpeechSynthesisUtterance(`
+            This is an example of the Speech Synthesis API. 
+            Two sentences are read, and nothing more.
+        `)
+
+        phrase.onstart = () =>
+            say.disabled = true,
+            state.textContent = 'Playing'
+        phrase.onend = () => 
+            say.disabled = false,
+            state.textContent = 'Stopped'
+
+        speechSynthesis.speak(phrase)
+    })
+</script>
