@@ -10,7 +10,8 @@
             say.disabled = true
             state.textContent = 'Playing'
         }
-        phrase.onend = function () { 
+
+        phrase.onend = function () {
             say.disabled = false
             state.textContent = 'Stopped'
         }
