@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mouse Click Identifier</title>
+        <script>
+            document.addEventListener("DOMContentLoaded", e => {
+
+                let clickPad = document.querySelector("#clickPad");
+                let outputLog = document.querySelector("#outputLog");
+
+                ["click", "auxclick"].forEach(eventType => {
+                    clickPad.addEventListener(eventType, event => {
+                        event.stopPropagation();
+                        logOutput(`${event.buttons} with ${event.type} was pressed`);
+                        return false;
+                    })
+                })
+
+                let logOutput = message => {
+                    outputLog.appendChild(
+                        document.createElement("p")
+                    ).textContent = message;
+                }
+
+            })
+        </script>
+        <style>
+            #clickPad {
+                width: 100px;
+                height: 100px;
+                background: gray;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Click the gray box, then right-click the gray box:</p>
+        <div id="clickPad"></div>
+        <div id="outputLog"></div>
+    </body>
+</html>
