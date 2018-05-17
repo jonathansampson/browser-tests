@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Testing Autoplay</title>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Autoplay Tests.</h1>
+            <p>This page exists to test media that automatically plays once the page has loaded. Several media elements exist below; each are configured to begin playing in a different manner.</p>
+            <p>At any given time, you can click the button below to pause all videos.</p>
+            <p><button>Stop All</button></p>
+            <script>
+                document.querySelector('button').addEventListener('click', () => {
+                    Array.from(
+                        document.querySelectorAll('video')
+                    ).forEach(o => o.pause())
+                })
+            </script>
+            <h2>Autoplay Attribute</h2>
+            <video src="trailer.m4v" controls autoplay></video>
+            <h2>Invoking video.play()</h2>
+            <video src="trailer.m4v" controls></video>
+            <script>
+                document.querySelectorAll('video')[1].play()
+            </script>
+            <h2>Setting video.autoplay</h2>
+            <video src="trailer.m4v" controls></video>
+            <script>
+                document.querySelectorAll('video')[2].autoplay = true
+            </script>
+            <script>
+                Array.from(document.querySelectorAll('video')).forEach(o => {
+                    // Mute Videos
+                    o.volume = 0
+
+                    // Set up a timer
+                    let timer = document.createElement('p')
+                    o.parentElement.insertBefore(timer, o)
+                    setInterval(function () {
+                        timer.textContent = o.currentTime + "s"
+                    }, 500)
+                })
+            </script>
+        </div>
+    </body>
+</html>
