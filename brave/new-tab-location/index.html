@@ -2,11 +2,21 @@
 <html>
     <head>
         <title></title>
+        <style>
+            a {
+                vertical-align: top;
+                display: inline-block;
+                width: 300px; height: 150px;
+            }
+            a, iframe {
+                border: 1px solid #CCC;
+            }
+        </style>
     </head>
     <body>
         <h1>Two Links:</h1>
         <p>The first link is in <em>this document</em> while the second link is in an iframe.</p>
-        <a href="https://t.co/Q53nnQEaHP" target="_blank" class="url-ext" data-full-url="http://youtu.be/zGJl1RZ4SPA?a" rel="url noopener noreferrer">youtu.be/zGJl1RZ4SPA?a</a> 
+        <a href="page.html" target="_blank" rel="noopener">Document Link</a> 
         <iframe src="link-page.html" frameborder="0"></iframe>
     </body>
 </html>
