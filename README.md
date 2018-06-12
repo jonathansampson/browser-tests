@@ -1,2 +1,2 @@
 # browser-tests
-Small scripts meant to test web browsers
+Small scripts meant to test web browsers.
